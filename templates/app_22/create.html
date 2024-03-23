@@ -1,0 +1,14 @@
+<h3>Create Form</h3>
+
+{% if not created  %}
+ 
+<form action="." method="post">
+    {% csrf_token %}
+    Anime Name: <input type="text" name="name" id=""><br>
+    Anime Episode: <input type="number" name="number"><br>
+    <input type="submit" value="Create">
+</form>
+{% else %}
+    <h1>Creatd Success fully </h1>
+    <p>{{object.anime_name}}-{{object.anime_episodes}}</p>
+{% endif %}

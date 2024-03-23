@@ -1,1 +1,12 @@
+
+{% if request.user.is_authenticated %}
 <p>{{session_key}}</p>
+<form action="/logout-view/" method="post">
+    {% csrf_token %}
+    Are You Want to Log Out ?
+    <input type="submit" value="Log Out">
+</form>
+{% else %}
+<p>You are not Loged in <a href="{% url 'login_view' %}">Loign</a></p>
+
+{% endif %}

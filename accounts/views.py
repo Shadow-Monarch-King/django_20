@@ -38,10 +38,9 @@ def account_view(request):
 
 
 
-def logout_view(request):
-    if request.method == 'POST':
-        print(request)
-        logout(request)
-        return redirect('login_view')
-    return render(request,'accounts/view.html',{})
+def logout_view(request):   
+    print(request)
+    logout(request)
+    return redirect('login_view')
+    # render(request,'accounts/view.html',{})
     

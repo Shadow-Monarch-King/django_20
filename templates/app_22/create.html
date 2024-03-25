@@ -2,11 +2,11 @@
 
 {% if not created  %}
  
+ <!-- {% csrf_token %} -->
 <form action="." method="post">
     {% csrf_token %}
-    Anime Name: <input type="text" name="name" id=""><br>
-    Anime Episode: <input type="number" name="number"><br>
-    <input type="submit" value="Create">
+    {{form}}
+    <input type="submit" value="Create">   
 </form>
 {% else %}
     <h1>Creatd Success fully </h1>

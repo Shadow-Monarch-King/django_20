@@ -4,3 +4,6 @@ from django.db import models
 class Anime(models.Model):
     anime_name = models.CharField(max_length = 100)
     anime_episodes = models.IntegerField()
+    
+    
+    

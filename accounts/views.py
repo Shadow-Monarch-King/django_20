@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login as log_in, logout
 # Create your views here.
@@ -23,7 +24,7 @@ def login_view(request):
     return render(request,'accounts/login.html',context)
 
 
-
+@login_required
 def account_view(request):
     
     session_name = request.user.username

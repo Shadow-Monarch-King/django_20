@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse
 from .models import Anime
 # Create your views here.
-
+from .forms import CreateAnimeForm
 def index(request):
     return HttpResponse('<p>Hi TEST</p>')
 
@@ -37,13 +37,18 @@ def search(request):
     
     
 def create(request):
-    context= {}
-    print(request.POST)
+    
+    # print(request.POST)
+    form = CreateAnimeForm()
+    # print(form)
+    context= {'form':form}
     if request.method == 'POST':
-        name = request.POST.get('name')
-        number = request.POST.get('number')
-        object = Anime.objects.create(anime_name = name,anime_episodes = number)
-        context['object'] = object
-        context['created'] = True
+        form = CreateAnimeForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('anime_name')
+            number = form.cleaned_data.get('anime_episodes')
+            object = Anime.objects.create(anime_name = name,anime_episodes = number)
+            context['object'] = object
+            context['created'] = True
         
     return render(request,'app_22/create.html',context)

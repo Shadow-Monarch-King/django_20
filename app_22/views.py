@@ -61,15 +61,27 @@ def search(request):
 
 #===================================Another Method ==================================
 
+# def create(request):
+#     form = CreateAnimeForm(request.POST or None)
+#     context= {'form':form} 
+#     context['form'] = form
+#     if form.is_valid():
+#         name = form.cleaned_data.get('anime_name')
+#         number = form.cleaned_data.get('anime_episodes')
+#         object = Anime.objects.create(anime_name = name,anime_episodes = number)
+#         context['object'] = object
+#         context['created'] = True
+       
+#     return render(request,'app_22/create.html',context)
+
+
+#===================================Model Form Method ==================================
+
 def create(request):
     form = CreateAnimeForm(request.POST or None)
     context= {'form':form} 
     context['form'] = form
     if form.is_valid():
-        name = form.cleaned_data.get('anime_name')
-        number = form.cleaned_data.get('anime_episodes')
-        object = Anime.objects.create(anime_name = name,anime_episodes = number)
-        context['object'] = object
-        context['created'] = True
-       
+        object = form.save()
+        context ['form'] = CreateAnimeForm()   # ------------->To use create new form After submit
     return render(request,'app_22/create.html',context)

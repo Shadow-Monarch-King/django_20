@@ -1,6 +1,25 @@
 from django import forms
+from .models import Anime
 
-class CreateAnimeForm(forms.Form):
+class CreateAnimeForm(forms.ModelForm):
+    class Meta:
+        model = Anime
+        fields = ['anime_name','anime_episodes']
+        
+    def clean(self):
+        data = self.cleaned_data
+        anime_name = data.get('anime_name')
+        print("Anime NAme: ",anime_name)
+        qs = Anime.objects.filter(anime_name__icontains = anime_name)
+        print("Query Search:",qs)
+        if qs.exists():
+            
+            self.add_error('anime_name',f'{anime_name} is already Taken')
+
+
+
+
+class CreateAnimeFormOld(forms.Form):
     anime_name = forms.CharField()
     anime_episodes = forms.IntegerField()
     

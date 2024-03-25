@@ -1,0 +1,15 @@
+
+{% if not request.user.is_authenticated %}
+<p>{{session_key}}</p>
+<form action="." method="post">{% csrf_token %}
+    {% if error %}
+    <p style="color: red;">{{error}}</p>
+    {% endif %}
+    {{form}}
+    <input type="submit" value="Register">
+</form>
+<button><a href="{% url 'logout_view'%}" style="text-decoration: none;">Log Out</a></button>
+{% else %}
+<p>You are not Loged in <a href="{% url 'login_view' %}">Loign</a></p>
+
+{% endif %}

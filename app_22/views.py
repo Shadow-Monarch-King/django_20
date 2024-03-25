@@ -35,20 +35,41 @@ def search(request):
     else:
         return render(request,'app_22/home.html')
     
+    #===================================One Method ==================================
+# def create(request):
     
+#     # print(request.POST)
+#     form = CreateAnimeForm()
+#     # 
+#     context= {'form':form}
+#     # print("Form 1-------",form)
+#     if request.method == 'POST':
+#         # 
+#         form = CreateAnimeForm(request.POST)
+#         context['form'] = form
+#         # print("Form 2 ===============",form)
+#         if form.is_valid():
+#             name = form.cleaned_data.get('anime_name')
+#             number = form.cleaned_data.get('anime_episodes')
+#             object = Anime.objects.create(anime_name = name,anime_episodes = number)
+#             context['object'] = object
+#             context['created'] = True
+#             # print("Form 3 =++++++===",form)
+#     return render(request,'app_22/create.html',context)
+
+
+
+#===================================Another Method ==================================
+
 def create(request):
-    
-    # print(request.POST)
-    form = CreateAnimeForm()
-    # print(form)
-    context= {'form':form}
-    if request.method == 'POST':
-        form = CreateAnimeForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data.get('anime_name')
-            number = form.cleaned_data.get('anime_episodes')
-            object = Anime.objects.create(anime_name = name,anime_episodes = number)
-            context['object'] = object
-            context['created'] = True
-        
+    form = CreateAnimeForm(request.POST or None)
+    context= {'form':form} 
+    context['form'] = form
+    if form.is_valid():
+        name = form.cleaned_data.get('anime_name')
+        number = form.cleaned_data.get('anime_episodes')
+        object = Anime.objects.create(anime_name = name,anime_episodes = number)
+        context['object'] = object
+        context['created'] = True
+       
     return render(request,'app_22/create.html',context)
